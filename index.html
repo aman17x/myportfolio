@@ -5,238 +5,465 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Aman Baruah – Portfolio</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Exo+2:wght@300;400;600;700&display=swap"
     rel="stylesheet"
   />
   <style>
     :root {
-      --bg: #000;
-      --accent: #ff0000;
-      --text: #ff6666;
-      --dark: #220000;
-      --dark2: #330000;
-      --font: 'Orbitron', sans-serif;
+      --primary: #00ff88;
+      --secondary: #ff0080;
+      --accent: #00d4ff;
+      --bg-dark: #0a0a0f;
+      --bg-card: #1a1a2e;
+      --bg-hover: #16213e;
+      --text-light: #e0e6ed;
+      --text-dim: #9ba3af;
+      --glow: #00ff8844;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-main: 'Exo 2', sans-serif;
     }
 
-    *, *::before, *::after {
+    * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--accent);
-      font-family: var(--font);
-      min-height: 100%;
+    body {
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #0f1419 100%);
+      color: var(--text-light);
+      font-family: var(--font-main);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    canvas {
+    /* Animated background */
+    .bg-animation {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -1;
+      background: 
+        radial-gradient(circle at 20% 80%, var(--glow) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+      animation: pulse 4s ease-in-out infinite alternate;
     }
 
+    @keyframes pulse {
+      0% { opacity: 0.3; }
+      100% { opacity: 0.6; }
+    }
+
+    /* Header */
     header {
-      padding: 1rem;
+      padding: 3rem 1rem;
       text-align: center;
-      border-bottom: 2px solid var(--accent);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      text-shadow: 0 0 10px var(--accent);
-    }
-    header p {
-      margin: .5rem 0;
-      font-size: 1rem;
-      color: var(--text);
+      position: relative;
+      background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.05));
+      border-bottom: 1px solid var(--primary);
     }
 
-    section {
-      padding: 2rem 1rem;
-      max-width: 900px;
-      margin: auto;
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 30px var(--primary);
     }
-    h2 {
+
+    .hero-subtitle {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--text-dim);
       margin-bottom: 1rem;
-      font-size: 1.5rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.2rem;
       color: var(--accent);
-      border-bottom: 2px solid var(--accent);
-      text-shadow: 0 0 5px var(--accent);
-      padding-bottom: .5rem;
+      font-weight: 300;
     }
 
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    li {
-      background: var(--dark);
-      margin: .5rem 0;
-      padding: .75rem 1rem;
-      border-left: 4px solid var(--accent);
-      border-radius: 4px;
-      color: var(--text);
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
     }
 
-    .expertise li {
-      background: var(--dark2);
+    /* Sections */
+    section {
+      margin: 3rem 0;
+      padding: 2rem;
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Responsive grid for skills & expertise */
-    .grid-2 {
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-family: var(--font-mono);
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* Contact Cards */
+    .contact-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1rem;
     }
 
-    .project-title {
-      display: block;
-      font-weight: bold;
-      color: #ff4d4d;
-      margin-bottom: .25rem;
-    }
-    .techstack {
-      font-style: italic;
-      color: var(--text);
+    .contact-card {
+      background: var(--bg-hover);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
     }
 
+    .contact-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 255, 136, 0.2);
+    }
+
+    .contact-label {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-value {
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-item {
+      background: linear-gradient(135deg, var(--bg-hover), rgba(0, 255, 136, 0.05));
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .skill-item:hover::before {
+      left: 100%;
+    }
+
+    .skill-item:hover {
+      transform: scale(1.05);
+      border-color: var(--primary);
+      box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
+    }
+
+    /* Expertise Cards */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .expertise-card {
+      background: var(--bg-hover);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .expertise-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+    }
+
+    .expertise-title {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .expertise-techs {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+
+    /* Projects */
+    .project-card {
+      background: var(--bg-hover);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 0, 128, 0.3);
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateX(10px);
+      border-color: var(--secondary);
+      box-shadow: -5px 0 25px rgba(255, 0, 128, 0.2);
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-description {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .project-tech {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      background: rgba(0, 255, 136, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    /* Buttons */
     .buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
-      margin-top: 1rem;
-    }
-    .buttons a {
-      display: inline-block;
-      text-decoration: none;
-      background: var(--accent);
-      color: var(--bg);
-      padding: .5rem 1rem;
-      border-radius: 4px;
-      box-shadow: 0 0 10px var(--accent);
-      transition: .3s;
-    }
-    .buttons a:hover {
-      background: #990000;
-      color: var(--accent);
+      margin-top: 2rem;
     }
 
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: var(--bg-dark);
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--accent), var(--secondary));
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 0;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 255, 136, 0.4);
+    }
+
+    /* Footer */
     footer {
       text-align: center;
-      padding: 1rem;
-      border-top: 2px solid var(--accent);
-      font-size: .9rem;
-      color: var(--text);
+      padding: 2rem;
+      margin-top: 3rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      border-top: 1px solid rgba(0, 255, 136, 0.2);
     }
 
-    @media (max-width: 600px) {
-      header h1 { font-size: 2rem; }
-      h2 { font-size: 1.25rem; }
+    /* Responsive */
+    @media (max-width: 768px) {
+      section {
+        margin: 2rem 0;
+        padding: 1.5rem;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 200px;
+        justify-content: center;
+      }
     }
   </style>
-  <script>
-    window.addEventListener('load', () => {
-      const canvas = document.createElement('canvas');
-      document.body.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-      const setSize = () => {
-        canvas.width = innerWidth;
-        canvas.height = innerHeight;
-      };
-      setSize();
-      window.addEventListener('resize', setSize);
-
-      const cols = Math.floor(canvas.width / 10) + 1;
-      const drops = Array(cols).fill(0);
-      const draw = () => {
-        ctx.fillStyle = 'rgba(0,0,0,0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#ff0000';
-        drops.forEach((y, x) => {
-          const char = String.fromCharCode(0x30A0 + Math.random() * 96);
-          const posX = x * 10;
-          ctx.fillText(char, posX, y);
-          drops[x] = y > canvas.height ? 0 : y + 10;
-        });
-      };
-      setInterval(draw, 50);
-    });
-  </script>
 </head>
 <body>
+  <div class="bg-animation"></div>
+  
   <header>
-    <h1>Aman Baruah</h1>
-    <p>4th Year Student, Presidency University</p>
+    <h1 class="hero-title">Aman Baruah</h1>
+    <p class="hero-subtitle">// 4th Year Student @ Presidency University</p>
+    <p class="hero-tagline">Building the Future with Code</p>
   </header>
 
-  <section class="contact">
-    <h2>Contact</h2>
-    <ul>
-      <li><strong>Date of Birth:</strong> 20-06-2004</li>
-      <li><strong>Phone:</strong> 8123784937</li>
-      <li><strong>Email:</strong> baruahaman17@gmail.com</li>
-    </ul>
-  </section>
+  <div class="container">
+    <section>
+      <h2>Contact</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-label">Date of Birth</div>
+          <div class="contact-value">20-06-2004</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">8123784937</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">baruahaman17@gmail.com</div>
+        </div>
+      </div>
+    </section>
 
-  <section class="skills">
-    <h2>Skills</h2>
-    <ul class="grid-2">
-      <li>Teamwork & Collaboration</li>
-      <li>Team Leadership</li>
-      <li>Organization & Time Management</li>
-      <li>Excellent Communication</li>
-      <li>Project Coordination</li>
-      <li>Python</li>
-      <li>Java</li>
-      <li>Mobile App Development</li>
-      <li>Front-end Frameworks</li>
-      <li>OOP Principles</li>
-    </ul>
-  </section>
+    <section>
+      <h2>Core Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-item">Teamwork & Leadership</div>
+        <div class="skill-item">Project Management</div>
+        <div class="skill-item">Communication</div>
+        <div class="skill-item">Python Development</div>
+        <div class="skill-item">Java Programming</div>
+        <div class="skill-item">Mobile Development</div>
+        <div class="skill-item">Frontend Frameworks</div>
+        <div class="skill-item">OOP Principles</div>
+      </div>
+    </section>
 
-  <section class="expertise">
-    <h2>Skills & Expertise</h2>
-    <ul class="grid-2">
-      <li><strong>Frontend Full Stack:</strong> React, TypeScript, HTML, CSS, JavaScript</li>
-      <li><strong>Backend & Database:</strong> Node.js, Flask, MySQL</li>
-      <li><strong>Android Dev:</strong> XML, Java, Android Studio, Flutter</li>
-      <li><strong>IoT Tech:</strong> Arduino, ESP32, Raspberry Pi, C, MQTT</li>
-    </ul>
-  </section>
+    <section>
+      <h2>Technical Expertise</h2>
+      <div class="expertise-grid">
+        <div class="expertise-card">
+          <div class="expertise-title">Frontend Development</div>
+          <div class="expertise-techs">React • TypeScript • HTML • CSS • JavaScript</div>
+        </div>
+        <div class="expertise-card">
+          <div class="expertise-title">Backend & Database</div>
+          <div class="expertise-techs">Node.js • Python Flask • MySQL</div>
+        </div>
+        <div class="expertise-card">
+          <div class="expertise-title">Mobile Development</div>
+          <div class="expertise-techs">Android Studio • Java • XML • Flutter</div>
+        </div>
+        <div class="expertise-card">
+          <div class="expertise-title">IoT & Hardware</div>
+          <div class="expertise-techs">Arduino • ESP32 • Raspberry Pi • C • MQTT</div>
+        </div>
+      </div>
+    </section>
 
-  <section class="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li>
-        <span class="project-title">Footstep Power & Smart Lights</span>
-        <span class="techstack">Arduino · Piezo Sensors · LEDs · UV Sensor</span>
-      </li>
-      <li>
-        <span class="project-title">Alcohol Detection Ignition Lock</span>
-        <span class="techstack">Raspberry Pi · MQ3 Sensor · Python · GPIO</span>
-      </li>
-      <li>
-        <span class="project-title">Responsive Art Gallery</span>
-        <span class="techstack">HTML · CSS · JavaScript · Bootstrap</span>
-      </li>
-    </ul>
-  </section>
+    <section>
+      <h2>Featured Projects</h2>
+      
+      <div class="project-card">
+        <div class="project-title">Arduino-based Footstep Power Generation</div>
+        <div class="project-description">
+          Innovative energy harvesting system that captures kinetic energy from footsteps using piezoelectric sensors to power smart street lighting infrastructure with motion detection capabilities.
+        </div>
+        <div class="project-tech">Arduino • Piezoelectric Sensors • LEDs • UV Sensor</div>
+      </div>
 
-  <section class="get-in-touch">
-    <h2>Get in Touch</h2>
-    <div class="buttons">
-      <a href="https://github.com" target="_blank">GitHub</a>
-      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-      <a href="mailto:baruahaman17@gmail.com">Email</a>
-    </div>
-  </section>
+      <div class="project-card">
+        <div class="project-title">Smart Alcohol Detection System</div>
+        <div class="project-description">
+          Advanced vehicle safety system using Raspberry Pi that prevents ignition when alcohol is detected through breath analysis, enhancing road safety through IoT integration.
+        </div>
+        <div class="project-tech">Raspberry Pi • MQ3 Sensor • Python • GPIO</div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-title">Interactive Art Gallery Platform</div>
+        <div class="project-description">
+          Responsive web application showcasing digital artwork with immersive galleries, artist profiles, and dynamic event management system.
+        </div>
+        <div class="project-tech">HTML • CSS • JavaScript • Bootstrap</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Let's Connect</h2>
+      <div class="buttons">
+        <a href="https://github.com" target="_blank" class="btn">GitHub</a>
+        <a href="https://linkedin.com" target="_blank" class="btn">LinkedIn</a>
+        <a href="mailto:baruahaman17@gmail.com" class="btn">Email</a>
+      </div>
+    </section>
+  </div>
 
   <footer>
-    &copy; 2025 Aman Baruah. All rights reserved.
+    <p>&copy; 2025 Aman Baruah • Crafted with passion</p>
   </footer>
 </body>
 </html>
