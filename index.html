@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Aman Baruah – Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
   <style>
     :root {
       --primary: #00ff88;
@@ -61,6 +62,7 @@
       font-family: var(--font-main);
       line-height: 1.6;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     .bg-animation {
@@ -100,13 +102,15 @@
       font-family: var(--font-mono);
       font-size: 1.1rem;
       color: var(--text-dim);
-      margin-bottom: 0.3rem;
+      margin-top: 0.3rem;
+      margin-bottom: 1rem;
     }
 
-    .hero-tagline {
-      font-size: 1.2rem;
-      color: var(--accent);
-      font-weight: 300;
+    #personal-greeting {
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+      font-family: var(--font-mono);
+      color: var(--highlight);
     }
 
     .container {
@@ -301,6 +305,22 @@
       margin-top: 4rem;
     }
 
+    /* Custom cursor styles */
+    .custom-cursor {
+      pointer-events: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 36px; height: 36px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      transition: background 0.2s, opacity 0.17s, transform 0.15s;
+      background: rgba(255,140,0,0.1);
+      box-shadow: 0 0 18px 8px #ff8c0044;
+      mix-blend-mode: plus-lighter;
+      opacity: 0.75;
+    }
+
     @media screen and (max-width: 768px) {
       section {
         padding: 1.5rem;
@@ -319,97 +339,98 @@
 <body>
   <!-- Theme Switcher -->
   <div style="position:fixed;top:1rem;right:1.5rem;z-index:100;">
-    <label style="display:flex;align-items:center;gap:8px;">
+    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
       <input id="theme-toggle" type="checkbox" />
-      <span style="font-size:1rem;font-family:monospace;">🌙/☀️</span>
+      <span style="font-size:1rem;font-family:monospace;user-select:none;">🌙/☀️</span>
     </label>
   </div>
   <div class="bg-animation"></div>
   <canvas id="three-bg" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;"></canvas>
+  <div class="custom-cursor"></div>
 
   <header>
-    <h1 class="hero-title">Aman Baruah</h1>
-    <p class="hero-subtitle">// 4th Year Student @ Presidency University</p>
-    <p class="hero-tagline">Building the Future with Code</p>
+    <h1 class="hero-title" data-aos="fade-down" data-aos-duration="1000">Aman Baruah</h1>
+    <p class="hero-subtitle" data-aos="fade-right" data-aos-duration="1200">// 4th Year Student @ Presidency University</p>
+    <div id="personal-greeting" data-aos="fade-left" data-aos-duration="1400"></div>
   </header>
 
   <div class="container">
-    <section>
+    <section data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
       <h2>Contact</h2>
       <div class="contact-grid">
-        <div class="contact-card">
+        <div class="contact-card" data-aos="fade-right" data-aos-duration="800" data-aos-delay="300">
           <div class="contact-label">Date of Birth</div>
           <div class="contact-value">20-06-2004</div>
         </div>
-        <div class="contact-card">
+        <div class="contact-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
           <div class="contact-label">Phone</div>
           <div class="contact-value">8123784937</div>
         </div>
-        <div class="contact-card">
+        <div class="contact-card" data-aos="fade-left" data-aos-duration="800" data-aos-delay="500">
           <div class="contact-label">Email</div>
           <div class="contact-value">baruahaman17@gmail.com</div>
         </div>
       </div>
     </section>
 
-    <section>
+    <section data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
       <h2>Strengths</h2>
       <div class="skills-grid">
-        <div class="skill-item">Teamwork & Collaboration</div>
-        <div class="skill-item">Team Leadership</div>
-        <div class="skill-item">Project Management</div>
-        <div class="skill-item">Excellent Communication</div>
-        <div class="skill-item">Organization & Time Management</div>
+        <div class="skill-item" data-aos="zoom-in" data-aos-delay="350">Teamwork & Collaboration</div>
+        <div class="skill-item" data-aos="zoom-in" data-aos-delay="400">Team Leadership</div>
+        <div class="skill-item" data-aos="zoom-in" data-aos-delay="450">Project Management</div>
+        <div class="skill-item" data-aos="zoom-in" data-aos-delay="500">Excellent Communication</div>
+        <div class="skill-item" data-aos="zoom-in" data-aos-delay="550">Organization & Time Management</div>
       </div>
     </section>
 
-    <section>
+    <section data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
       <h2>Technical Skills</h2>
       <div class="expertise-grid">
-        <div class="expertise-card">
+        <div class="expertise-card" data-aos="flip-left" data-aos-delay="450">
           <div class="expertise-title">Programming Languages</div>
           <div class="expertise-techs">Python, Java</div>
         </div>
-        <div class="expertise-card">
+        <div class="expertise-card" data-aos="flip-left" data-aos-delay="500">
           <div class="expertise-title">Frontend Development</div>
           <div class="expertise-techs">React, TypeScript, HTML, CSS, JavaScript</div>
         </div>
-        <div class="expertise-card">
+        <div class="expertise-card" data-aos="flip-left" data-aos-delay="550">
           <div class="expertise-title">Backend & Database</div>
           <div class="expertise-techs">Node.js, Flask, MySQL</div>
         </div>
-        <div class="expertise-card">
+        <div class="expertise-card" data-aos="flip-left" data-aos-delay="600">
           <div class="expertise-title">Mobile App Development</div>
           <div class="expertise-techs">Android Studio, Java, XML, Flutter</div>
         </div>
-        <div class="expertise-card">
+        <div class="expertise-card" data-aos="flip-left" data-aos-delay="650">
           <div class="expertise-title">IoT & Hardware</div>
           <div class="expertise-techs">Arduino, ESP32, Raspberry Pi, C, MQTT</div>
         </div>
-        <div class="expertise-card">
+        <div class="expertise-card" data-aos="flip-left" data-aos-delay="700">
           <div class="expertise-title">Other Concepts</div>
           <div class="expertise-techs">OOP Principles, Front-end Frameworks</div>
         </div>
       </div>
     </section>
 
-    <section>
+    <section data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
       <h2>Featured Projects</h2>
-      <div class="project-card">
+      <div class="project-card" data-aos="zoom-in" data-aos-delay="550">
         <div class="project-title">Arduino-based Footstep Power Generation</div>
         <div class="project-description">
           Innovative energy harvesting system that captures kinetic energy from footsteps using piezoelectric sensors to power smart street lighting infrastructure with motion detection capabilities.
         </div>
         <div class="project-tech">Arduino • Piezoelectric Sensors • LEDs • UV Sensor</div>
       </div>
-      <div class="project-card">
+      <div class="project-card" data-aos="zoom-in" data-aos-delay="600">
         <div class="project-title">Smart Alcohol Detection System</div>
         <div class="project-description">
           Advanced vehicle safety system using Raspberry Pi that prevents ignition when alcohol is detected through breath analysis, enhancing road safety through IoT integration.
         </div>
         <div class="project-tech">Raspberry Pi • MQ3 Sensor • Python • GPIO</div>
       </div>
-      <div class="project-card">
+      <div class="project-card" data-aos="zoom-in" data-aos-delay="650">
         <div class="project-title">Interactive Art Gallery Platform</div>
         <div class="project-description">
           Responsive web application showcasing digital artwork with immersive galleries, artist profiles, and dynamic event management system.
@@ -418,7 +439,7 @@
       </div>
     </section>
 
-    <section>
+    <section data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
       <h2>Let's Connect</h2>
       <div class="buttons">
         <a href="https://github.com/aman17x" target="_blank" class="btn">GitHub</a>
@@ -427,15 +448,24 @@
       </div>
     </section>
   </div>
-  <footer>
+  <footer data-aos="fade-up" data-aos-duration="1000" data-aos-delay="700">
     <p>&copy; 2025 Aman Baruah • Crafted with passion</p>
   </footer>
 
-  <!-- Theme Toggle Script -->
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
   <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 900,
+      once: true,
+    });
+
+    // Theme Toggle Logic
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
-    if (localStorage.getItem('theme') === 'light') {
+    if(localStorage.getItem('theme') === 'light'){
       body.classList.add('light-theme');
       themeToggle.checked = true;
     }
@@ -448,11 +478,30 @@
         localStorage.setItem('theme', 'dark');
       }
     });
-  </script>
-  <!-- Three.js 3D Particle Background -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
-  <script>
-    // 3D Background using Three.js
+
+    // Custom Cursor
+    const cursor = document.querySelector('.custom-cursor');
+    window.addEventListener('mousemove', e => {
+      cursor.style.top = e.clientY + 'px';
+      cursor.style.left = e.clientX + 'px';
+    });
+    window.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%, -50%) scale(0.8)');
+    window.addEventListener('mouseup', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+    window.addEventListener('touchstart', () => cursor.style.opacity = 0);
+    window.addEventListener('touchend', () => cursor.style.opacity = 0.75);
+
+    // Dynamic Greeting
+    function getGreeting() {
+      const now = new Date();
+      const hour = now.getHours();
+      if (hour < 5) return "Burning the midnight oil?";
+      if (hour < 12) return "Good Morning!";
+      if (hour < 18) return "Good Afternoon!";
+      return "Good Evening!";
+    }
+    document.getElementById('personal-greeting').textContent = getGreeting();
+
+    // 3D Particle Background with THREE.js
     let scene = new THREE.Scene();
     let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
     let renderer = new THREE.WebGLRenderer({canvas: document.getElementById('three-bg'), alpha: true});
@@ -460,9 +509,9 @@
     let particles = new THREE.Points(
       new THREE.BufferGeometry().setAttribute(
         "position",
-        new THREE.BufferAttribute(new Float32Array(Array.from({length:1500*3},()=>THREE.MathUtils.randFloatSpread(80))), 3)
+        new THREE.BufferAttribute(new Float32Array(Array.from({length:1500*3}, () => THREE.MathUtils.randFloatSpread(80))), 3)
       ),
-      new THREE.PointsMaterial({color: 0xff8c00, size: 0.5, transparent:true, opacity:0.7})
+      new THREE.PointsMaterial({color: 0xff8c00, size: 0.5, transparent: true, opacity: 0.7})
     );
     scene.add(particles);
     camera.position.z = 48;
@@ -473,10 +522,10 @@
       renderer.render(scene, camera);
     }
     animate();
-    window.addEventListener('resize', ()=>{
-      camera.aspect=window.innerWidth/window.innerHeight;
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth/window.innerHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth,window.innerHeight);
+      renderer.setSize(window.innerWidth, window.innerHeight);
     });
   </script>
 </body>
