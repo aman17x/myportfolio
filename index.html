@@ -11,8 +11,8 @@
   <style>
     :root {
       --primary: #00ff88;
-      --secondary: #ff0080;
       --accent: #00d4ff;
+      --highlight: #ff8c00;
       --bg-dark: #0a0a0f;
       --bg-card: #1a1a2e;
       --bg-hover: #16213e;
@@ -23,6 +23,30 @@
       --font-main: 'Exo 2', sans-serif;
     }
 
+    body.light-theme {
+      --primary: #009e5c;
+      --accent: #338dff;
+      --highlight: #ef7500;
+      --bg-dark: #fafafc;
+      --bg-card: #f1f2f8;
+      --bg-hover: #e8eaee;
+      --text-light: #181925;
+      --text-dim: #868c96;
+      color: var(--text-light);
+      background: linear-gradient(135deg, var(--bg-dark), #f6fafd);
+    }
+
+    body.light-theme .bg-animation { opacity: 0.18 !important; }
+    body.light-theme .project-card,
+    body.light-theme .expertise-card,
+    body.light-theme .contact-card,
+    body.light-theme section {
+      background: var(--bg-card) !important;
+      color: var(--text-light) !important;
+    }
+    body.light-theme .project-title { color: var(--highlight) !important; }
+    body.light-theme .hero-title { text-shadow: 0 0 12px var(--primary); }
+
     * {
       margin: 0;
       padding: 0;
@@ -30,25 +54,21 @@
     }
 
     body {
-      background: linear-gradient(135deg, var(--bg-dark) 0%, #0f1419 100%);
+      background: linear-gradient(135deg, var(--bg-dark), #0f1419);
       color: var(--text-light);
       font-family: var(--font-main);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* Animated background */
     .bg-animation {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       z-index: -1;
-      background: 
+      background:
         radial-gradient(circle at 20% 80%, var(--glow) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 0, 128, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 80% 20%, rgba(255, 165, 0, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(0, 212, 255, 0.04) 0%, transparent 50%);
       animation: pulse 4s ease-in-out infinite alternate;
     }
 
@@ -57,11 +77,9 @@
       100% { opacity: 0.6; }
     }
 
-    /* Header */
     header {
       padding: 3rem 1rem;
       text-align: center;
-      position: relative;
       background: linear-gradient(45deg, transparent, rgba(0, 255, 136, 0.05));
       border-bottom: 1px solid var(--primary);
     }
@@ -73,7 +91,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.5rem;
       text-shadow: 0 0 30px var(--primary);
     }
 
@@ -81,7 +98,7 @@
       font-family: var(--font-mono);
       font-size: 1.1rem;
       color: var(--text-dim);
-      margin-bottom: 1rem;
+      margin-bottom: 0.3rem;
     }
 
     .hero-tagline {
@@ -90,55 +107,50 @@
       font-weight: 300;
     }
 
-    /* Container */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1rem;
     }
 
-    /* Sections */
     section {
       margin: 3rem 0;
       padding: 2rem;
       background: var(--bg-card);
       border-radius: 12px;
       border: 1px solid rgba(0, 255, 136, 0.2);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
       position: relative;
-      overflow: hidden;
     }
 
     section::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
       height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+      width: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent), var(--highlight));
     }
 
     h2 {
       font-size: 1.8rem;
-      font-weight: 600;
       color: var(--primary);
-      margin-bottom: 1.5rem;
       font-family: var(--font-mono);
+      margin-bottom: 1.5rem;
       position: relative;
     }
 
     h2::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
+      content: "";
       width: 50px;
       height: 2px;
       background: var(--accent);
+      position: absolute;
+      bottom: -6px;
+      left: 0;
     }
 
-    /* Contact Cards */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -147,33 +159,25 @@
 
     .contact-card {
       background: var(--bg-hover);
-      padding: 1.5rem;
+      padding: 1.25rem;
       border-radius: 8px;
       border-left: 4px solid var(--accent);
-      transition: all 0.3s ease;
-    }
-
-    .contact-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 255, 136, 0.2);
     }
 
     .contact-label {
       font-family: var(--font-mono);
-      font-size: 0.9rem;
       color: var(--text-dim);
-      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
     }
 
     .contact-value {
       font-weight: 600;
-      color: var(--text-light);
+      font-size: 1rem;
     }
 
-    /* Skills Grid */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1rem;
     }
 
@@ -183,106 +187,84 @@
       border-radius: 8px;
       border: 1px solid rgba(0, 255, 136, 0.3);
       text-align: center;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .skill-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .skill-item:hover::before {
-      left: 100%;
+      transition: 0.3s;
     }
 
     .skill-item:hover {
       transform: scale(1.05);
       border-color: var(--primary);
-      box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3);
+      box-shadow: 0 6px 25px rgba(0, 255, 136, 0.2);
     }
 
-    /* Expertise Cards */
     .expertise-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.5rem;
     }
 
     .expertise-card {
       background: var(--bg-hover);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 212, 255, 0.3);
-      transition: all 0.3s ease;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      transition: 0.3s ease;
     }
 
     .expertise-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-3px);
       border-color: var(--accent);
-      box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+      box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
     }
 
     .expertise-title {
+      color: var(--accent);
       font-family: var(--font-mono);
       font-weight: 600;
-      color: var(--accent);
       margin-bottom: 0.5rem;
     }
 
     .expertise-techs {
       color: var(--text-dim);
-      font-size: 0.95rem;
     }
 
-    /* Projects */
     .project-card {
-  background: var(--bg-hover);
-  padding: 2rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 165, 0, 0.3);
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
-}
+      background: var(--bg-hover);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 165, 0, 0.3);
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
 
-.project-card:hover {
-  transform: translateX(10px);
-  border-color: #ff8c00;
-  box-shadow: -5px 0 25px rgba(255, 165, 0, 0.2);
-}
+    .project-card:hover {
+      transform: translateX(10px);
+      border-color: #ff8c00;
+      box-shadow: -5px 0 25px rgba(255, 165, 0, 0.2);
+    }
 
-.project-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #ff8c00;
-  margin-bottom: 0.5rem;
-}
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #ff8c00;
+      margin-bottom: 0.5rem;
+    }
 
-.project-description {
-  color: var(--text-light);
-  margin-bottom: 1rem;
-  line-height: 1.7;
-}
+    .project-description {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
 
-.project-tech {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--text-dim);
-  background: rgba(0, 255, 136, 0.1);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  display: inline-block;
-}
+    .project-tech {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      background: rgba(0, 255, 136, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      display: inline-block;
+    }
 
-
-    /* Buttons */
     .buttons {
       display: flex;
       flex-wrap: wrap;
@@ -292,78 +274,57 @@
     }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.8rem 2rem;
+      text-decoration: none;
       background: linear-gradient(45deg, var(--primary), var(--accent));
       color: var(--bg-dark);
-      text-decoration: none;
+      font-family: var(--font-mono);
+      padding: 0.8rem 1.8rem;
       border-radius: 25px;
       font-weight: 600;
-      font-family: var(--font-mono);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, var(--accent), var(--secondary));
-      transition: left 0.3s ease;
-      z-index: -1;
-    }
-
-    .btn:hover::before {
-      left: 0;
+      transition: 0.3s ease;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0, 255, 136, 0.4);
+      color: var(--primary);
+      background: transparent;
+      border: 2px solid var(--primary);
+      transform: scale(1.05);
     }
 
-    /* Footer */
     footer {
       text-align: center;
       padding: 2rem;
-      margin-top: 3rem;
       color: var(--text-dim);
       font-family: var(--font-mono);
-      border-top: 1px solid rgba(0, 255, 136, 0.2);
+      margin-top: 4rem;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
+    @media screen and (max-width: 768px) {
       section {
-        margin: 2rem 0;
         padding: 1.5rem;
       }
-      
       .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
-      
-      .buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
       .btn {
+        display: block;
         width: 100%;
-        max-width: 200px;
-        justify-content: center;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
+  <div style="position:fixed;top:1rem;right:1.5rem;z-index:100;">
+    <label style="display:flex;align-items:center;gap:8px;">
+      <input id="theme-toggle" type="checkbox" />
+      <span style="font-size:1rem;font-family:monospace;">🌙/☀️</span>
+    </label>
+  </div>
+
   <div class="bg-animation"></div>
-  
+  <canvas id="three-bg" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;"></canvas>
+
   <header>
     <h1 class="hero-title">Aman Baruah</h1>
     <p class="hero-subtitle">// 4th Year Student @ Presidency University</p>
@@ -372,7 +333,7 @@
 
   <div class="container">
     <section>
-      <h2>Personal Info</h2>
+      <h2>Contact</h2>
       <div class="contact-grid">
         <div class="contact-card">
           <div class="contact-label">Date of Birth</div>
@@ -390,44 +351,49 @@
     </section>
 
     <section>
-      <h2>Core Skills</h2>
+      <h2>Strengths</h2>
       <div class="skills-grid">
-        <div class="skill-item">Teamwork & Leadership</div>
+        <div class="skill-item">Teamwork & Collaboration</div>
+        <div class="skill-item">Team Leadership</div>
         <div class="skill-item">Project Management</div>
-        <div class="skill-item">Communication</div>
-        <div class="skill-item">Python Development</div>
-        <div class="skill-item">Java Programming</div>
-        <div class="skill-item">Mobile Development</div>
-        <div class="skill-item">Frontend Frameworks</div>
-        <div class="skill-item">OOP Principles</div>
+        <div class="skill-item">Excellent Communication</div>
+        <div class="skill-item">Organization & Time Management</div>
       </div>
     </section>
 
     <section>
-      <h2>Technical Expertise</h2>
+      <h2>Technical Skills</h2>
       <div class="expertise-grid">
         <div class="expertise-card">
+          <div class="expertise-title">Programming Languages</div>
+          <div class="expertise-techs">Python, Java</div>
+        </div>
+        <div class="expertise-card">
           <div class="expertise-title">Frontend Development</div>
-          <div class="expertise-techs">React • TypeScript • HTML • CSS • JavaScript</div>
+          <div class="expertise-techs">React, TypeScript, HTML, CSS, JavaScript</div>
         </div>
         <div class="expertise-card">
           <div class="expertise-title">Backend & Database</div>
-          <div class="expertise-techs">Node.js • Python Flask • MySQL</div>
+          <div class="expertise-techs">Node.js, Flask, MySQL</div>
         </div>
         <div class="expertise-card">
-          <div class="expertise-title">Mobile Development</div>
-          <div class="expertise-techs">Android Studio • Java • XML • Flutter</div>
+          <div class="expertise-title">Mobile App Development</div>
+          <div class="expertise-techs">Android Studio, Java, XML, Flutter</div>
         </div>
         <div class="expertise-card">
           <div class="expertise-title">IoT & Hardware</div>
-          <div class="expertise-techs">Arduino • ESP32 • Raspberry Pi • C • MQTT</div>
+          <div class="expertise-techs">Arduino, ESP32, Raspberry Pi, C, MQTT</div>
+        </div>
+        <div class="expertise-card">
+          <div class="expertise-title">Other Concepts</div>
+          <div class="expertise-techs">OOP Principles, Front-end Frameworks</div>
         </div>
       </div>
     </section>
 
     <section>
       <h2>Featured Projects</h2>
-      
+
       <div class="project-card">
         <div class="project-title">Arduino-based Footstep Power Generation</div>
         <div class="project-description">
@@ -456,8 +422,8 @@
     <section>
       <h2>Let's Connect</h2>
       <div class="buttons">
-        <a href="https://github.com/aman17x" target="_blank" class="btn">GitHub</a>
-        <a href="https://in.linkedin.com/in/aman-baruah-961a68353?trk=people-guest_people_search-card" target="_blank" class="btn">LinkedIn</a>
+        <a href="https://github.com" target="_blank" class="btn">GitHub</a>
+        <a href="https://linkedin.com" target="_blank" class="btn">LinkedIn</a>
         <a href="mailto:baruahaman17@gmail.com" class="btn">Email</a>
       </div>
     </section>
@@ -466,5 +432,54 @@
   <footer>
     <p>&copy; 2025 Aman Baruah • Crafted with passion</p>
   </footer>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    if (localStorage.getItem('theme') === 'light') {
+      body.classList.add('light-theme');
+      themeToggle.checked = true;
+    }
+    themeToggle.addEventListener('change', () => {
+      if (themeToggle.checked) {
+        body.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.classList.remove('light-theme');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
+  <!-- Three.js 3D Particle Background -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
+  <script>
+    // 3D Background using Three.js
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    let renderer = new THREE.WebGLRenderer({canvas: document.getElementById('three-bg'), alpha: true});
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    let particles = new THREE.Points(
+      new THREE.BufferGeometry().setAttribute(
+        "position",
+        new THREE.BufferAttribute(new Float32Array(Array.from({length:1500*3},()=>THREE.MathUtils.randFloatSpread(80))), 3)
+      ),
+      new THREE.PointsMaterial({color: 0xff8c00, size: 0.5, transparent:true, opacity:0.7})
+    );
+    scene.add(particles);
+    camera.position.z = 48;
+    function animate() {
+      requestAnimationFrame(animate);
+      particles.rotation.x += 0.0006;
+      particles.rotation.y += 0.0013;
+      renderer.render(scene, camera);
+    }
+    animate();
+    window.addEventListener('resize', ()=>{
+      camera.aspect=window.innerWidth/window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth,window.innerHeight);
+    });
+  </script>
 </body>
 </html>
