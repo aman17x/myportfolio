@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Aman Baruah – Portfolio</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Exo+2:wght@300;400;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --primary: #00ff88;
@@ -28,10 +25,10 @@
       --accent: #338dff;
       --highlight: #ef7500;
       --bg-dark: #fafafc;
-      --bg-card: #f1f2f8;
-      --bg-hover: #e8eaee;
-      --text-light: #181925;
-      --text-dim: #868c96;
+      --bg-card: #d9dbe3;
+      --bg-hover: #c6c8d1;
+      --text-light: #1a1a1a;
+      --text-dim: #555964;
       color: var(--text-light);
       background: linear-gradient(135deg, var(--bg-dark), #f6fafd);
     }
@@ -43,9 +40,14 @@
     body.light-theme section {
       background: var(--bg-card) !important;
       color: var(--text-light) !important;
+      box-shadow: 0 6px 24px 0 rgba(40,60,110,0.10), 0 1.5px 4px 0 rgba(80,100,170,0.19);
+      border: 1.5px solid #b1b3be;
     }
     body.light-theme .project-title { color: var(--highlight) !important; }
-    body.light-theme .hero-title { text-shadow: 0 0 12px var(--primary); }
+    body.light-theme .expertise-title { color: var(--accent) !important; }
+    body.light-theme .contact-label { color: var(--text-dim) !important; }
+    body.light-theme .project-tech { background: rgba(0,158,92,0.08) !important; }
+    body.light-theme .skill-item { background: linear-gradient(135deg, var(--bg-hover), #ececf1) !important; }
 
     * {
       margin: 0;
@@ -315,13 +317,13 @@
   </style>
 </head>
 <body>
+  <!-- Theme Switcher -->
   <div style="position:fixed;top:1rem;right:1.5rem;z-index:100;">
     <label style="display:flex;align-items:center;gap:8px;">
       <input id="theme-toggle" type="checkbox" />
       <span style="font-size:1rem;font-family:monospace;">🌙/☀️</span>
     </label>
   </div>
-
   <div class="bg-animation"></div>
   <canvas id="three-bg" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;"></canvas>
 
@@ -393,7 +395,6 @@
 
     <section>
       <h2>Featured Projects</h2>
-
       <div class="project-card">
         <div class="project-title">Arduino-based Footstep Power Generation</div>
         <div class="project-description">
@@ -401,7 +402,6 @@
         </div>
         <div class="project-tech">Arduino • Piezoelectric Sensors • LEDs • UV Sensor</div>
       </div>
-
       <div class="project-card">
         <div class="project-title">Smart Alcohol Detection System</div>
         <div class="project-description">
@@ -409,7 +409,6 @@
         </div>
         <div class="project-tech">Raspberry Pi • MQ3 Sensor • Python • GPIO</div>
       </div>
-
       <div class="project-card">
         <div class="project-title">Interactive Art Gallery Platform</div>
         <div class="project-description">
@@ -422,13 +421,12 @@
     <section>
       <h2>Let's Connect</h2>
       <div class="buttons">
-        <a href="https://github.com" target="_blank" class="btn">GitHub</a>
-        <a href="https://linkedin.com" target="_blank" class="btn">LinkedIn</a>
+        <a href="https://github.com/aman17x" target="_blank" class="btn">GitHub</a>
+        <a href="https://www.linkedin.com/in/aman-baruah-961a68353/" target="_blank" class="btn">LinkedIn</a>
         <a href="mailto:baruahaman17@gmail.com" class="btn">Email</a>
       </div>
     </section>
   </div>
-
   <footer>
     <p>&copy; 2025 Aman Baruah • Crafted with passion</p>
   </footer>
